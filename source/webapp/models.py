@@ -22,7 +22,6 @@ class Product(models.Model):
     amount = models.IntegerField(verbose_name='Остаток', validators=[(MinValueValidator(0))])
 
     price = models.DecimalField(verbose_name='Цена', max_digits=7, decimal_places=2)
-    img = models.CharField(max_length=1500, null=True, blank=True, verbose_name='Ссылка на фотографию')
 
     def __str__(self):
         return f'{self.name} - {self.amount}'

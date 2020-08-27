@@ -1,0 +1,108 @@
+body {
+    font-family: Roboto, sans-serif;
+}
+
+.photo{
+    width: 100%;
+    height: auto;
+}
+
+.card-body{
+    background-color: royalblue;
+}
+
+.card-text {
+    color: white;
+    white-space: pre-line;
+    font-size: 18px;
+}
+
+.card-title {
+    color: white;
+}
+
+.card {
+    border: solid 2px dodgerblue;
+}
+
+img{
+    align-self: center;
+}
+
+#main-center{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.card-category {
+    color: whitesmoke;
+}
+
+.price {
+    color: white;
+    font-size: 20px;
+}
+
+.card-icons{
+    color: white;
+    font-size: 18px;
+}
+
+#card-view{
+    float: left;
+}
+
+.delete-button{
+    background-color: crimson;
+    color: white;
+    font-size: 42px;
+    display: inline-block;
+    border-radius: 5px;
+    margin-top: 100px;
+}
+
+.delete-button:hover{
+    background-color: #dd2828;
+    text-decoration: none;
+    color: white;
+}
+
+.update-button{
+    background-color: #3a4;
+    color: white;
+    font-size: 42px;
+    display: inline-block;
+    border-radius: 5px;
+}
+
+.update-button:hover{
+    background-color: seagreen;
+    text-decoration: none;
+    color: white;
+}
+
+.back-button{
+    background-color: royalblue;
+    color: white;
+    font-size: 42px;
+    display: inline-block;
+    border-radius: 5px;
+    border: none;
+}
+
+.back-button:hover{
+    background-color: dodgerblue;
+    text-decoration: none;
+    color: white;
+}
+
+.form {
+    align-content: center;
+    text-align: center;
+}
+
+.error{
+    font-size: 18px;
+    color: red;
+    font-weight: bold;
+}

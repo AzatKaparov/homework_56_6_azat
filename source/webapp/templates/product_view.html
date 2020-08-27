@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}View{% endblock %}
+
+
+{% block menu %}
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'delete' product.pk %}">Удалить</a>
+    </li>
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'update' product.pk %}">Обновить</a>
+    </li>
+{% endblock %}
+
+
+{% block content %}
+    <div id="card-view" class="card my-4" style="width: 18rem">
+        <img class="photo" src="{{ product.img }}">
+          <div class="card-body">
+              <h5 class="card-title">{{ product.name }}</h5>
+              <i><h6 class="card-category">{{ product.get_category_display }}</h6></i>
+                  <hr/>
+              <p class="card-text px-2">{{ product.description }}</p>
+                  <hr/>
+              <p class="price">Цена: {{ product.price }}</p>
+              <p class="price">Остаток: {{ product.amount }}</p>
+          </div>
+    </div>
+    <p class="mt-5"></p><a class="delete-button ml-5 px-3 mb-4" href="{% url 'delete' product.pk %}">Удалить</a><br/>
+    <a class="update-button ml-5 px-3 mb-4" href="{% url 'update' product.pk %}">Обновить</a><br/>
+    <a class="back-button ml-5 px-3 mb-4" href="{% url 'index' %}">Назад</a></p>
+{% endblock %}

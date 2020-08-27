@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete{% endblock %}
+
+{% block menu %}
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'index' %}">Отмена</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <h1 id="main-center">Вы уверены, что хотите удалить запись?</h1>
+    <div id="card-view" class="card my-4" style="width: 18rem">
+        <img class="photo" src="{{ product.img }}">
+          <div class="card-body">
+              <h5 class="card-title">{{ product.name }}</h5>
+              <i><h6 class="card-category">{{ product.get_category_display }}</h6></i>
+                  <hr/>
+              <p class="card-text px-2">{{ product.description }}</p>
+                  <hr/>
+              <p class="price">Цена: {{ product.price }}</p>
+              <p class="price">Остаток: {{ product.amount }}</p>
+          </div>
+    </div>
+    <form action="{% url "delete" product.pk %}" method="post">
+        {% csrf_token %}
+        <p><input type="submit" value="Да" id="submit" class="btn btn-warning mt-5 ml-5 btn-lg"></p>
+        <p><a class="btn btn-info ml-5 btn-lg" href="{% url 'index' %}">Нет</a></p>
+    </form>
+{% endblock %}

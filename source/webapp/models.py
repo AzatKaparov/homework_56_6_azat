@@ -35,3 +35,10 @@ class Basket(models.Model):
     products = models.ForeignKey('webapp.Product', related_name='products_basket', on_delete=models.PROTECT,
                                verbose_name='Товары')
     amount = models.IntegerField(verbose_name='Остаток')
+
+    def __str__(self):
+        return f'{self.pk} - {self.products}'
+
+    class Meta:
+        verbose_name = 'Корзина'
+        verbose_name_plural = 'Корзины'

@@ -29,3 +29,9 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
+
+
+class Basket(models.Model):
+    products = models.ForeignKey('webapp.Product', related_name='products_basket', on_delete=models.PROTECT,
+                               verbose_name='Товары')
+    amount = models.IntegerField(verbose_name='Остаток')

@@ -15,6 +15,7 @@
                   <a href="{% url 'delete' product.pk %}" class="card-icons"><i class="far fa-minus-square"></i></a>
                   <a href="{% url 'update' product.pk %}" class="card-icons"><i class="fas fa-pen-alt"></i></a>
                   <a href="{% url 'product_view' product.pk %}" class="card-icons"><i class="fas fa-info-circle"></i></a> </h5>
+                  <a href="#" class="card-icons"><i class="fas fa-shopping-basket"></i></a>
                   <i><h6 class="card-category">{{ product.get_category_display }}</h6></i>
                       <hr/>
               <p class="price">Цена: {{ product.price }}</p>

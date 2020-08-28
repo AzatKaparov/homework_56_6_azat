@@ -1,18 +1,16 @@
-from django.urls import reverse
 from django.db.models import Q
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from webapp.models import Product, Basket
-from django.http import HttpResponseNotAllowed
-from webapp.forms import ProductForm, SimpleSearchForm, BasketForm
+from webapp.forms import SimpleSearchForm, OrderForm
 from django.utils.http import urlencode
-from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView, View
+from django.views.generic import ListView, DeleteView, View
 from django.core.exceptions import ObjectDoesNotExist
 
 
 class BasketCreateView(View):
     model = Basket
-    form_class = BasketForm
+    form_class = None
     queryset = Basket.objects.all()
 
     def post(self, request, *args, **kwargs):
@@ -48,10 +46,11 @@ class BaskletIndexView(ListView):
         baskets = []
         for i in Basket.objects.all():
             baskets.append({'total': i.products.price * i.amount, 'product': i.products, 'amount': i.amount, 'pk': i.pk})
-        context['form'] = self.form
+        context['ford'] = self.form
         context['baskets'] = baskets
         if self.search_value:
             context['query'] = urlencode({'search': self.search_value})
+        context['form'] = OrderForm(data=self.request.GET)
         return context
 
     def get_queryset(self):

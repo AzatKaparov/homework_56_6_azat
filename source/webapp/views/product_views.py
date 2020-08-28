@@ -1,9 +1,7 @@
 from django.urls import reverse
 from django.db.models import Q
-from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
 from webapp.models import Product
-from django.http import HttpResponseNotAllowed
 from webapp.forms import ProductForm, SimpleSearchForm
 from django.utils.http import urlencode
 from django.views.generic import ListView, DetailView, DeleteView, UpdateView, CreateView

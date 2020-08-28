@@ -21,8 +21,8 @@ class SimpleSearchForm(forms.Form):
     search = forms.CharField(max_length=100, required=False, label="Найти")
 
 
-class BasketForm(forms.ModelForm):
+class OrderForm(forms.Form):
+    user_name = forms.CharField(required=True, label='Имя пользователя')
+    phone = forms.CharField(required=True, label='Телефон')
+    address = forms.CharField(required=True, label='Адрес')
 
-    class Meta:
-        model = Basket
-        exclude = []

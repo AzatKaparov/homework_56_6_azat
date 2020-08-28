@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Main{% endblock %}
+
+{% block content %}
+    <h1 id="main-center" class="mt-5 mb-4">Корзина</h1>
+    <div class="result mb-5 mt-3 py-2">
+    <h1 style="text-align: center">Итого: {{ all }}</h1>
+    </div>
+    <div class="row">
+        <table class="table table-dark">
+            <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Название</th>
+                <th scope="col">Цена</th>
+                <th scope="col">В корзине</th>
+                <th scope="col">Сумма</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            {% for basket in baskets %}
+{#                {% widthratio basket.products.price 1 basket.amount as sum %}#}
+            <tbody>
+            <tr>
+                <th scope="row">{{ basket.pk }}</th>
+                <td>{{ basket.product.name }}</td>
+                <td>{{ basket.product.price }}</td>
+                <td>{{ basket.amount }}</td>
+                <td>{{ basket.total }}</td>
+                <td><a href="{% url 'basket_delete' basket.pk %}" class="btn btn-danger">Удалить</a></td>
+            </tr>
+            </tbody>
+             {% endfor %}
+            </table>
+    </div>
+
+{% endblock %}

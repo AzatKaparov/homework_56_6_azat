@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete{% endblock %}
+
+{% block menu %}
+    <li class="nav-item active">
+        <a class="nav-link" href="{% url 'index' %}">Отмена</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    <h1 id="main-center" class="mb-5 mt-4">Вы уверены, что хотите удалить запись?</h1>
+    <div class="basket">
+    <h1 class="pt-3">{{ basket.products }}</h1>
+    <h2 class="pb-4">Остаток: {{ basket.amount }}</h2>
+    <form action="{% url "basket_delete" basket.pk %}" method="post">
+        {% csrf_token %}
+        <p><input type="submit" value="Да" id="submit" class="btn btn-warning mb-2 btn-lg"></p>
+    </form>
+    <a class="btn btn-info mb-4 btn-lg" href="{% url 'basket_index' %}">Нет</a>
+    </div>
+{% endblock %}

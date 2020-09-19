@@ -20,4 +20,4 @@ class OrderCreateView(View):
                                             order_id=order.pk, product_id=i.products.pk)
         Basket.objects.all().delete()
 
-        return redirect('index')
+        return redirect('webapp:index')

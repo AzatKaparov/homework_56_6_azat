@@ -24,7 +24,7 @@ class BasketCreateView(View):
                 return redirect('index')
             else:
                 Basket.objects.create(products=product, amount=1)
-        return redirect('index')
+        return redirect('webapp:index')
 
 
 class BaskletIndexView(ListView):
@@ -72,4 +72,4 @@ class BaskletIndexView(ListView):
 class BasketDeleteView(DeleteView):
     model = Basket
     template_name = 'basket/basket_delete.html'
-    success_url = reverse_lazy('basket_index')
+    success_url = reverse_lazy('webapp:basket_index')

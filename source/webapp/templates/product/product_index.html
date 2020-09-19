@@ -12,13 +12,17 @@
             <div class="card my-4" style="width: 18rem">
               <div class="card-body">
                   <h5 class="card-title">{{ product.name }}</h5>
-                  <a href="{% url 'delete' product.pk %}" class="card-icons"><i class="far fa-minus-square"></i></a>
-                  <a href="{% url 'update' product.pk %}" class="card-icons"><i class="fas fa-pen-alt"></i></a>
-                  <a href="{% url 'product_view' product.pk %}" class="card-icons"><i class="fas fa-info-circle"></i></a> </h5>
+                  {% if perms.webapp.delete_product %}
+                  <a href="{% url 'webapp:delete' product.pk %}" class="card-icons"><i class="far fa-minus-square"></i></a>
+                  {% endif %}
+              {% if perms.webapp.change_product %}
+                  <a href="{% url 'webapp:update' product.pk %}" class="card-icons"><i class="fas fa-pen-alt"></i></a>
+                  {% endif %}
+                  <a href="{% url 'webapp:product_view' product.pk %}" class="card-icons"><i class="fas fa-info-circle"></i></a> </h5>
                   <i><h6 class="card-category">{{ product.get_category_display }}</h6></i>
                       <hr/>
               <p class="price">Цена: {{ product.price }}</p>
-   <form class="" action="{% url 'basket_create' product.pk %}" method="post">
+   <form class="" action="{% url 'webapp:basket_create' product.pk %}" method="post">
         {% csrf_token %}
         <input class="btn btn-info" type="submit" value="В корзину"/>
     </form>

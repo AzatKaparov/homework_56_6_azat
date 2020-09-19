@@ -4,12 +4,12 @@
 
 {% block menu %}
     <li class="nav-item active">
-        <a class="nav-link" href="{% url 'index' %}">Отмена</a>
+        <a class="nav-link" href="{% url 'webapp:index' %}">Отмена</a>
     </li>
 {% endblock %}
 
 {% block content %}
     <h1>Обновить запись</h1>
-    {% url "update" pk=product.pk as action_url %}
+    {% url "webapp:update" pk=product.pk as action_url %}
     {% include 'partial/form.html' with action_url=action_url form_method='post' button_text='Обновить!' %}
 {% endblock %}

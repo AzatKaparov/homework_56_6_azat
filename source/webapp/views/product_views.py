@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse
 from django.db.models import Q
 from django.urls import reverse_lazy
@@ -48,26 +49,29 @@ class ProductView(DetailView):
     model = Product
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(PermissionRequiredMixin, DeleteView):
     model = Product
     template_name = 'product/product_delete.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('webapp:index')
+    permission_required = 'webapp.delete_product'
 
 
-class ProjectUpdateView(UpdateView):
+class ProjectUpdateView(PermissionRequiredMixin, UpdateView):
     model = Product
     form_class = ProductForm
     template_name = 'product/product_update.html'
     context_object_name = 'product'
+    permission_required = 'webapp.change_product'
 
     def get_success_url(self):
-        return reverse('product_view', kwargs={'pk': self.object.pk})
+        return reverse('webapp:product_view', kwargs={'pk': self.object.pk})
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(PermissionRequiredMixin, CreateView):
     model = Product
     form_class = ProductForm
     template_name = 'product/product_create.html'
+    permission_required = 'webapp.add_product'
 
     def get_success_url(self):
-        return reverse('product_view', kwargs={'pk': self.object.pk})
+        return reverse('webapp:product_view', kwargs={'pk': self.object.pk})

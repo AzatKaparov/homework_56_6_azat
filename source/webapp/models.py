@@ -35,6 +35,7 @@ class Basket(models.Model):
     products = models.ForeignKey('webapp.Product', related_name='products_basket', on_delete=models.PROTECT,
                                verbose_name='Товары')
     amount = models.IntegerField(verbose_name='Остаток')
+    session = models.ForeignKey('sessions.Session', on_delete=models.CASCADE, related_name='basket', null=True)
 
     def __str__(self):
         return f'{self.pk} - {self.products}'

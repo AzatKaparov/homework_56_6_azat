@@ -128,3 +128,6 @@ LOGIN_URL = 'accounts:login'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/uploads/'
+
+SESSION_ENGINE = 'webapp.session_backend'
+

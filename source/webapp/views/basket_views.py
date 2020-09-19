@@ -6,6 +6,7 @@ from webapp.forms import SimpleSearchForm, OrderForm
 from django.utils.http import urlencode
 from django.views.generic import ListView, DeleteView, View
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib import messages
 
 
 class BasketCreateView(View):
@@ -16,18 +17,27 @@ class BasketCreateView(View):
     def post(self, request, *args, **kwargs):
         product = get_object_or_404(Product, pk=kwargs['pk'])
         try:
-            basket = Basket.objects.get(products=product)
+            basket = Basket.objects.get(products=product, session_id=self.get_session_key())
             basket.amount += 1
             basket.save()
+            messages.add_message(self.request, messages.SUCCESS, f'Добавлен товар: {basket.products.name}')
         except ObjectDoesNotExist:
-            if product.amount == 0:
+            if product.amount <= 0:
+                messages.add_message(self.request, messages.ERROR, f'Товара не осталось в наличии')
                 return redirect('index')
             else:
-                Basket.objects.create(products=product, amount=1)
+                basket = Basket.objects.create(products=product, amount=1, session_id=self.get_session_key())
+                messages.add_message(self.request, messages.SUCCESS, f'Добавлен товар: {basket.products.name}')
         return redirect('webapp:index')
 
+    def get_session_key(self):
+        session = self.request.session
+        if not session.session_key:
+            session.save()
+        return session.session_key
 
-class BaskletIndexView(ListView):
+
+class BasketIndexView(ListView):
     template_name = 'basket/basket_index.html'
     context_object_name = 'baskets'
     model = Basket
@@ -58,7 +68,13 @@ class BaskletIndexView(ListView):
         if self.search_value:
             query = Q(id__icontains=self.search_value)
             queryset = queryset.filter(query)
-        return queryset
+        return queryset.filter(session_id=self.get_session_key())
+
+    def get_session_key(self):
+        session = self.request.session
+        if not session.session_key:
+            session.save()
+        return session.session_key
 
     def get_search_form(self):
         return SimpleSearchForm(self.request.GET)
@@ -73,3 +89,7 @@ class BasketDeleteView(DeleteView):
     model = Basket
     template_name = 'basket/basket_delete.html'
     success_url = reverse_lazy('webapp:basket_index')
+
+    def get_context_data(self, **kwargs):
+        super().get_context_data()
+        messages.add_message(self.request, messages.WARNING, f'Вы собираетесь удалить этот товар из корзины!')

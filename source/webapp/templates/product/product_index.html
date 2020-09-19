@@ -3,7 +3,8 @@
 {% block title %}Main{% endblock %}
 
 {% block content %}
-    <h1 id="main-center" class="mt-5">Список товаров</h1>
+    {% include "partial/messages.html" %}
+    <h1 id="main-center" class="">Список товаров</h1>
     {% include 'partial/pagination.html' %}
 {#<!--    <p id="main-center-2"><a href="{% url 'create' %}"><i class="fas fa-plus-circle main-icon"></i></a></p>-->#}
     <div class="row">

@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.urls import reverse
 from django.db.models import Q
 from django.urls import reverse_lazy
+from django.contrib.sessions.models import Session
 from webapp.models import Product
 from webapp.forms import ProductForm, SimpleSearchForm
 from django.utils.http import urlencode
@@ -42,6 +43,7 @@ class ProductIndexView(ListView):
         if self.form.is_valid():
             return self.form.cleaned_data['search']
         return None
+
 
 
 class ProductView(DetailView):

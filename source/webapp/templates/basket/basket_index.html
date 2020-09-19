@@ -3,7 +3,8 @@
 {% block title %}Main{% endblock %}
 
 {% block content %}
-    <h1 id="main-center" class="mt-5 mb-4">Корзина</h1>
+    {% include "partial/messages.html" %}
+    <h1 id="main-center" class="mb-4">Корзина</h1>
     <div class="result mb-5 mt-3 py-2">
     <h1 style="text-align: center">Итого: {{ all }}</h1>
     </div>

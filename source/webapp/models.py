@@ -53,6 +53,7 @@ class Order(models.Model):
     products = models.ManyToManyField('webapp.Product', related_name='orders', through='webapp.ProductOrder',
                                       through_fields=('order', 'product', 'product_amount'), blank=True,
                                       verbose_name='Продукты')
+    user = models.ForeignKey('auth.User', related_name='order', on_delete=models.PROTECT, null=True)
 
 
 class ProductOrder(models.Model):

@@ -123,4 +123,14 @@ img{
     border: solid 2px #8b9093;
 }
 
-ю
+.products_in_list {
+    color: white;
+}
+
+#order-link {
+    color: white;
+}
+
+#order-link:hover {
+    color: yellow;
+}

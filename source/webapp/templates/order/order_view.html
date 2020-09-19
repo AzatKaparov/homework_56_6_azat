@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}View{% endblock %}
+
+{% block menu %}
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'webapp:order_list' %}">Назад</a>
+</li>
+{% endblock %}
+
+{% block content %}
+    <div id="card-view" class="card my-4" style="width: 18rem">
+          <div class="card-body">
+              <h5 class="card-title">Имя: {{ order.user_name }}</h5>
+                  <hr/>
+              {% for i in order.products.all %}
+                <ul>
+                <li>
+                    <p class="products_in_list">{{ i.name }} - {{ i.price }}</p>
+                </li>
+                </ul>
+              {% endfor %}
+                  <hr/>
+              <p class="card-text px-2">Телефон: {{ order.phone }}</p>
+              <p class="card-text px-2">Адрес: {{ order.address }}</p>
+              <p class="price">Дата: {{ order.date.date }}</p>
+              <p class="price">Время: {{ order.date.time }}</p>
+          </div>
+    </div>
+{% endblock %}

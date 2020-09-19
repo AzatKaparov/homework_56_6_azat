@@ -45,7 +45,6 @@ class ProductIndexView(ListView):
         return None
 
 
-
 class ProductView(DetailView):
     template_name = 'product/product_view.html'
     model = Product

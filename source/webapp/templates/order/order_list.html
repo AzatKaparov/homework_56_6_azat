@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "base.html" %}
 
-</body>
-</html>
+{% block title %}Main{% endblock %}
+
+{% block content %}
+    <h1 id="main-center" class="">Ваши заказы</h1>
+{#<!--    <p id="main-center-2"><a href="{% url 'create' %}"><i class="fas fa-plus-circle main-icon"></i></a></p>-->#}
+    <div class="row">
+        {% for order in orders %}
+        <div class="col-12 col-sm-12 col-md-6 col-lg-4">
+            <div class="card my-4" style="width: 18rem">
+              <div class="card-body">
+                  <h5 class="card-title">{{ order.user_name }}</h5>
+                  <a href="{% url 'webapp:order_view' order.pk %}" id="order-link">Подробнее...</a></h5>
+              <p class="price">{{ order.date.date }}</p>
+              <p class="price">{{ order.date.time }}</p>
+              </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}
